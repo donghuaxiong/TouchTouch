@@ -98,13 +98,15 @@ private final class DisplayServicesBrightnessController {
 
 private final class BrightnessCLIController {
     private let executableURL: URL
+    private var cachedValue: Double?
 
     init(executablePath: String) {
         executableURL = URL(fileURLWithPath: executablePath)
     }
 
     func adjust(by delta: Double) -> Double? {
-        guard let currentValue = currentValue() else {
+        let currentValue = cachedValue ?? currentValue()
+        guard let currentValue else {
             print("[TouchTouch] brightness CLI output was unreadable")
             return nil
         }
@@ -115,6 +117,7 @@ private final class BrightnessCLIController {
             print("[TouchTouch] brightness CLI failed: \(result.output)")
             return nil
         }
+        cachedValue = newValue
         return newValue
     }
 
