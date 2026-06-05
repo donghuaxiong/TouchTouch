@@ -217,6 +217,7 @@ private struct VolumeHUDIcon: View {
                 MuteSlashLine()
                     .stroke(color, style: StrokeStyle(lineWidth: 7, lineCap: .round, lineJoin: .round))
                     .frame(width: 72, height: 72)
+                    .offset(x: -7)
                     .transition(.opacity.combined(with: .scale))
             } else {
                 ForEach(0..<level, id: \.self) { index in
@@ -281,8 +282,8 @@ private struct MuteSlashLine: Shape {
         let w = rect.width
         let h = rect.height
         var path = Path()
-        path.move(to: CGPoint(x: w * 0.47, y: h * 0.69))
-        path.addLine(to: CGPoint(x: w * 0.82, y: h * 0.34))
+        path.move(to: CGPoint(x: w * 0.28, y: h * 0.72))
+        path.addLine(to: CGPoint(x: w * 0.64, y: h * 0.28))
         return path
     }
 }
